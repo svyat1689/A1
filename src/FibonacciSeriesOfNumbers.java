@@ -23,8 +23,8 @@ public class FibonacciSeriesOfNumbers {
 		}
 		
 		System.out.println("");
-		System.out.println("Fibonacci series of numbers using iterative function:");
 		System.out.println("");
+		System.out.println("Fibonacci series of numbers using iterative function:");
 		
 		fiboSeriesIte(num);
 
