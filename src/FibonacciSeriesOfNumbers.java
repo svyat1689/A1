@@ -1,6 +1,7 @@
 /* Svyatoslav Loboda
  * Jan 25, 2018
- * This program outputs Fibonacci series of numbers
+ * This program outputs Fibonacci series of numbers using recursive and iterative functions.
+ * 
  */
 import java.util.Scanner;
 
@@ -9,19 +10,20 @@ public class FibonacciSeriesOfNumbers {
 	public static void main(String[] args) {
 		
 		Scanner reader = new Scanner(System.in);
-		System.out.println("Enter integer number:");
+		System.out.print("Enter integer number: ");
 		int num = reader.nextInt();
 		reader.close();
 		
-		System.out.println("Fibonacci series of numbers though recursive function:");
 		System.out.println("");
+		System.out.println("Fibonacci series of numbers using recursive function:");
+
 		
 		for (int i = 0; i <= num; i++ ) {
 			System.out.print(fiboSeriesRec(i)+" ");
 		}
 		
 		System.out.println("");
-		System.out.println("Fibonacci series of numbers though iterative function:");
+		System.out.println("Fibonacci series of numbers using iterative function:");
 		System.out.println("");
 		
 		fiboSeriesIte(num);
@@ -61,4 +63,3 @@ public class FibonacciSeriesOfNumbers {
 	}
 
 }
-
