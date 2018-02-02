@@ -19,7 +19,6 @@ public class FibonacciSeriesOfNumbers {
 		System.out.println(" ---------------------------");
 		
 		//user defined input of n-th number for generating Fibonacci series of numbers
-		
 		boolean isInteger = false; //variable to test user input
 		int num = 0; //variable to hold user input
 		
@@ -27,18 +26,25 @@ public class FibonacciSeriesOfNumbers {
 		System.out.print("\n Enter a positive integer number: ");
 		//we accept the user's input and check if it is a positive integer; if not we ask the user to re-enter an integer
 		do {		
-			if (userInputNum.hasNextInt()) { //check if the user's input is an integer
-				num = userInputNum.nextInt();
-				isInteger = true;
-				if (num <= 0) { //check if the user's input is a positive integer
-					isInteger = false;
-					System.out.print(" Enter a positive integer number: ");
-				}
-			} else {
+			String s = userInputNum.nextLine();
+			if (s.trim().isEmpty()) { //if the user entered a white space 
+				isInteger = false;
 				System.out.print(" Enter a positive integer number: ");
-				userInputNum.next();
+			} else {
+				try {
+					num = Integer.parseInt(s.trim());
+					if (num > 0) { //if the user entered positive integer
+						isInteger = true;
+						} else { //if the user entered negative integer or zero
+							isInteger = false;
+							System.out.print(" Enter a positive integer number: ");
+							}
+					} catch (NumberFormatException nfe) {
+						System.out.print(" Enter a positive integer number: ");
+						}
 			}
-		} while (!(isInteger));
+			
+		} while (!isInteger);
 		userInputNum.close();
 		
 		//--Recursive function output--
@@ -55,13 +61,13 @@ public class FibonacciSeriesOfNumbers {
 		//stop the timer
         long endTimeRec = System.nanoTime();
         //compute time elapsed
-        long timeElapsedRec = endTimeRec-startTimeRec;
+        long timeElapsedRec = endTimeRec - startTimeRec;
         //outputting time elapsed
 		System.out.println(" \n Elapsed time in nanoseconds is: " + timeElapsedRec);
 		System.out.println(" Elapsed time in milliseconds is: " + timeElapsedRec/1000000 + "." + timeElapsedRec%1000000);
 		
 		//--Iterative function output--
-		System.out.println("\n Fibonacci series of numbers using iterative function:");
+		System.out.println("\n Fibonacci series of numbers up to the " +  num + "-th number including, using iterative function:");
 		System.out.print(" ");
 		//start the timer
 		long startTimeIte =  System.nanoTime();
@@ -70,21 +76,15 @@ public class FibonacciSeriesOfNumbers {
 		//stop the timer
         long endTimeIte = System.nanoTime();
         //compute the time elapsed
-        long timeElapsedIte = endTimeIte-startTimeIte;
+        long timeElapsedIte = endTimeIte - startTimeIte;
         //outputting time elapsed
 		System.out.println(" \n Elapsed time in nanoseconds is: " + timeElapsedIte);
 		System.out.println(" Elapsed time in milliseconds is: " + timeElapsedIte/1000000 + "." + timeElapsedIte%1000000);
 		
-		
-		/*System.out.print("Press any key to close the program: ");
-		Scanner userInput = new Scanner(System.in);
-		String input = userInput.nextLine();
-		userInput.close();*/
-
 	}
 	//--- the end of the main method ------------------------------------------------------------------------------
 	
-	
+	//Fibonacci series - Recursive method
 	public static long fiboSeriesRec(int number) {
 		if (number == 0) {
 			return 0;
@@ -96,7 +96,7 @@ public class FibonacciSeriesOfNumbers {
 			return fiboSeriesRec(number - 1) + fiboSeriesRec(number - 2);
 		}
 	}
-	
+	//Fibonacci series - Iterative method
 	public static void fiboSeriesIte(int number) {
 		long secondLastNum = 0;
 		long lastNum = 1;
