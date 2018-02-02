@@ -1,8 +1,10 @@
 /* Svyatoslav Loboda
  * Jan 25, 2018
- * This program will produce the Fibonacci series of numbers output up to a predefined n
+ * This program will produce the Fibonacci series of numbers output up to a predefined n-th number
  * (input by the user) using recursive and iterative functions.
- * 
+ * This program also utilizes Java timing library to time the run time of recursive and iterative
+ * methods that produce Fibonacci series of numbers and it outputs execution times in both
+ * nano- and milliseconds.
  */
 
 //import a simple text scanner
@@ -13,51 +15,71 @@ public class FibonacciSeriesOfNumbers {
 	//--- the main method -----------------------------------------------------------------------------------------
 	public static void main(String[] args) {
 		
-		Scanner reader = new Scanner(System.in);
-		System.out.print("Enter integer number: ");
-		int num = reader.nextInt();
-		reader.close();
+		System.out.println("\n FIBONACCI SERIES OF NUMBERS");
+		System.out.println(" ---------------------------");
 		
-		System.out.println("");
-		System.out.println("Fibonacci series of numbers using recursive function:");
+		//user defined input of n-th number for generating Fibonacci series of numbers
+		
+		boolean isInteger = false; //variable to test user input
+		int num = 0; //variable to hold user input
+		
+		Scanner userInputNum = new Scanner(System.in);
+		System.out.print("\n Enter a positive integer number: ");
+		//we accept the user's input and check if it is a positive integer; if not we ask the user to re-enter an integer
+		do {		
+			if (userInputNum.hasNextInt()) { //check if the user's input is an integer
+				num = userInputNum.nextInt();
+				isInteger = true;
+				if (num <= 0) { //check if the user's input is a positive integer
+					isInteger = false;
+					System.out.print(" Enter a positive integer number: ");
+				}
+			} else {
+				System.out.print(" Enter a positive integer number: ");
+				userInputNum.next();
+			}
+		} while (!(isInteger));
+		userInputNum.close();
+		
+		//--Recursive function output--
+		System.out.println("\n Fibonacci series of numbers up to the " +  num + "-th number including, using recursive function:");
+		System.out.print(" ");
 
-        //utilizing a variable to get the system time before we execute the recursive factorial method
+		// !!! - I used lecture materials for the timer code - !!!
+        //start the timer
         long startTimeRec =  System.nanoTime();
-        
+        //run the recursive function
 		for (int i = 0; i < num; i++ ) {
 			System.out.print(fiboSeriesRec(i)+" ");
 		}
-		
+		//stop the timer
         long endTimeRec = System.nanoTime();
-        //getting the time it took to run the method by subtracting startTime from endTime.
-        
+        //compute time elapsed
         long timeElapsedRec = endTimeRec-startTimeRec;
         //outputting time elapsed
+		System.out.println(" \n Elapsed time in nanoseconds is: " + timeElapsedRec);
+		System.out.println(" Elapsed time in milliseconds is: " + timeElapsedRec/1000000 + "." + timeElapsedRec%1000000);
 		
-		System.out.println(" \nElapsed time in nanoseconds is: " + timeElapsedRec);
-        
-		System.out.println("");
-		System.out.println("");
-		System.out.println("Fibonacci series of numbers using iterative function:");
-        //utilizing a variable to get the system time before we execute the recursive factorial method
-       
+		//--Iterative function output--
+		System.out.println("\n Fibonacci series of numbers using iterative function:");
+		System.out.print(" ");
+		//start the timer
 		long startTimeIte =  System.nanoTime();
-		
+		//run the iterative function
 		fiboSeriesIte(num);
-
+		//stop the timer
         long endTimeIte = System.nanoTime();
-        //getting the time it took to run the method by subtracting startTime from endTime.
-        
+        //compute the time elapsed
         long timeElapsedIte = endTimeIte-startTimeIte;
         //outputting time elapsed
+		System.out.println(" \n Elapsed time in nanoseconds is: " + timeElapsedIte);
+		System.out.println(" Elapsed time in milliseconds is: " + timeElapsedIte/1000000 + "." + timeElapsedIte%1000000);
 		
-		System.out.println(" \nElapsed time in nanoseconds is: " + timeElapsedIte);
 		
-		
-		System.out.print("Press any key to close the program: ");
+		/*System.out.print("Press any key to close the program: ");
 		Scanner userInput = new Scanner(System.in);
 		String input = userInput.nextLine();
-		userInput.close();
+		userInput.close();*/
 
 	}
 	//--- the end of the main method ------------------------------------------------------------------------------
